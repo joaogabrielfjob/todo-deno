@@ -1,6 +1,8 @@
 import { MongoClient } from './deps.ts'
-import User from '../models/user.ts'
 import { config } from '../config/deps.ts'
+
+import User from '../models/user.ts'
+import Task from '../models/task.ts'
 
 config({ export: true })
 
@@ -30,6 +32,8 @@ await client.connect({
 })
 
 const database = client.database(dbName)
-const users = database.collection<User>("users")
 
-export { users }
+const users = database.collection<User>("users")
+const tasks = database.collection<Task>("tasks")
+
+export { users, tasks }

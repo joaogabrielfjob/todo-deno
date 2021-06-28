@@ -1,10 +1,11 @@
 interface Task {
-  _id: { $oid: string }
+  _id?: { $oid: string }
+  userId: string,
   title: string,
   description: string,
   status: string,
-  createdAt: Date,
-  updatedAt: Date
+  createdAt: string,
+  updatedAt: string
 }
 
 export default Task
