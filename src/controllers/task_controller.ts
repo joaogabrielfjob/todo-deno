@@ -19,24 +19,9 @@ const getTasksByUserId = async (context: Context) => {
 const createTask = async (context: Context) => {
   try {
     const body = context.request.body()
+    const { userId, title, description } = await body.value
 
-    const { userId,
-      title,
-      description
-    } = await body.value
-
-    const status = "DOING"
-    const createdAt = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
-    const updatedAt = new Date().toLocaleString('pt-BR', { timeZone: 'America/Sao_Paulo' })
-
-    const id = await createNewTask({
-      userId,
-      title,
-      description,
-      status,
-      createdAt,
-      updatedAt
-    })
+    const id = await createNewTask(userId, title, description)
 
     context.response.body = { status: true, data: { taskId: id } }
     context.response.status = 201

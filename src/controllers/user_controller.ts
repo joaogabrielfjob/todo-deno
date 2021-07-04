@@ -18,14 +18,9 @@ const getUsers = async (context: Context) => {
 const createUser = async (context: Context) => {
   try {
     const body = context.request.body()
-
     const { email, password, name } = await body.value
 
-    const id = await createNewUser({
-      email,
-      password,
-      name
-    })
+    const id = await createNewUser(email, password, name)
 
     context.response.body = { status: true, data: { userId: id } }
     context.response.status = 201
