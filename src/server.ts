@@ -1,10 +1,12 @@
 import app from './config/app.ts'
-import { config } from './config/deps.ts'
+import { config, flags } from './config/deps.ts'
 
 config({ export: true })
 
-const port = Deno.env.get('PORT')!
+const { args } = Deno
+const argPort = flags.parse(args).port
+const port = argPort ? argPort : Deno.env.get('PORT')!
 
-app.listen({ port: +port })
+await app.listen({ port: +port })
 
 console.log("Server started on port", port)
